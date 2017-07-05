@@ -1,6 +1,5 @@
 """
-An introductory look at OOP through the 
-design of a simple credit card class.
+An introductory look at OOP through the design of a simple credit card class.
 """
 
 class CreditCard:
