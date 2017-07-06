@@ -59,3 +59,42 @@ class CreditCard:
             """Reduces the card's balance by a given payment amount."""
             self._balance -= payment
 
+class CompoundingCreditCard(CreditCard):
+    """An extension to the CreditCard class which compounds interest and adds fees."""
+
+    def __init__(self, customer, bank, acc, limit, apr):
+        """
+        Creates a new credit card instance with an
+        initial balance of zero.
+
+        customer -> the name of the customer
+        bank     -> the name of the bank
+        acc      -> the account ID
+        limit    -> credit card limit
+        apr      -> annual percentage rate
+        """
+        super().__init__(customer, bank, acc, limit)
+        self._apr = apr
+
+    def charge(self, price):
+        """
+        Charges the given price to the card, assuming that
+        the cost incurred would still be within the customer's
+        limit.
+
+        Returns 'True' if the charge was accepted.
+        Returns 'False' and adds a $5 fee otherwise.
+        """
+        success = super().charge(price)
+        if not success:
+            self._balance += 5
+        return success
+
+    def process_month(self):
+        """Adds monthly interest on outstanding balance."""
+        if (self._balance > 0):
+            charge = pow(1 + self._apr, 1/12)    # converts APR to a monthly factor
+            self._balance *= charge
+
+
+

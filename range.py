@@ -37,3 +37,6 @@ class Range:
 
         return self._start + (k * self._step)
 
+    def __iter__(self):
+        return self
+
