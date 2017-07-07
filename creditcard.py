@@ -62,6 +62,8 @@ class CreditCard:
 class CompoundingCreditCard(CreditCard):
     """An extension to the CreditCard class which compounds interest and adds fees."""
 
+    OVERLIMIT_FEE = 5
+
     def __init__(self, customer, bank, acc, limit, apr):
         """
         Creates a new credit card instance with an
@@ -87,7 +89,7 @@ class CompoundingCreditCard(CreditCard):
         """
         success = super().charge(price)
         if not success:
-            self._balance += 5
+            self._balance += CompoundingCreditCard.OVERLIMIT_FEE
         return success
 
     def process_month(self):
