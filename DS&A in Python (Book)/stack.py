@@ -13,36 +13,37 @@ class Stack:
     """Stack ADT implementation."""
 
     def __init__(self):
-        """Initializes an empty stack."""
+        """Initializes an empty Stack."""
         self._data = []
 
     def __len__(self):
-        """Returns the number of elements in the stack."""
+        """Returns the number of elements on the Stack."""
         return len(self._data)
 
     def is_empty(self):
-        """Returns 'True' if the stack is empty and 'False' otherwise."""
+        """Returns 'True' if the Stack is empty and 'False' otherwise."""
         return self._data == []
 
     def push(self, i):
-        """Adds element i to the stop of the stack."""
+        """Adds element i to the top of the Stack."""
         self._data.append(i)
 
-    def top(self):
-        """Returns the element on top of the stack but does not remove it."""
-        try:
-            return self._data[-1]
-        except:
-            raise Empty('The stack is empty.')
-
     def pop(self):
-        """Removes and returns the element on the top of the stack."""
+        """Removes and returns the element on the top of the Stack."""
         try:
             return self._data.pop()
         except:
-            raise Empty('The stack is empty.')
+            raise Empty('The Stack is empty.')
 
-# Unit Tests
+    def top(self):
+            """Returns the element on top of the Stack but does not remove it."""
+            try:
+                return self._data[-1]
+            except:
+                raise Empty('The Stack is empty.')
+
+
+# Unit Tests:
 if __name__ == '__main__':
     s = Stack()
     assert(len(s) == 0)
