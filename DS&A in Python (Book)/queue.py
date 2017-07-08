@@ -1,8 +1,15 @@
-from stack import Empty
 
 """
 An implementation of a Queue ADT using a Python list (adapter design pattern).
 """
+
+class Empty(Exception):
+    """
+    Error for attempting to access an
+    element from an empty structure.
+    """
+    pass
+
 
 class Queue:
     """Queue ADT implementation."""
@@ -16,9 +23,11 @@ class Queue:
         self._front = 0
 
     def __len__(self):
+        """Returns the number of elements in the Queue."""
         return self._size
 
     def is_empty(self):
+        """Returns 'True' if the Queue is empty and 'False' otherwise."""
         return self._size == 0
 
     def enqueue(self, i):
@@ -30,11 +39,10 @@ class Queue:
         self._size += 1
 
     def dequeue(self):
-        """Removes and returns the first element of the queue."""
-        try:
-            value = self._data[self._front]
-        except:
+        """Removes and returns the first element in the queue."""
+        if self.is_empty():
             raise Empty('The Queue is empty.')
+        value = self._data[self._front]
         self._data[self._front] = None    # for garbage collection
         self._front = (self._front + 1) % len(self._data)
         self._size -= 1
@@ -44,13 +52,12 @@ class Queue:
 
     def front(self):
         """Returns the element at the front of the Queue but does not remove it."""
-        try:
-            return self._data[self._front]
-        except:
+        if self.is_empty():
             raise Empty('The Queue is empty.')
+        return self._data[self._front]
     
     def _resize(self, num): 
-        """Resizes the Queue to have a new list of size num."""
+        """Resizes the Queue to use a new list of size num."""
         old = self._data
         self._data = [None] * num
         place = self._front

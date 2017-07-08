@@ -9,6 +9,7 @@ class Empty(Exception):
     """
     pass
 
+
 class Stack:
     """Stack ADT implementation."""
 
