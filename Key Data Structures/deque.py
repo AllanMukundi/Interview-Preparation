@@ -37,7 +37,6 @@ class Deque:
         self._data[self._front] = i
         self._size += 1
 
-
     def add_last(self, i):
         """Adds element i to the back of the Deque."""
         if (self._size == len(self._data)):
