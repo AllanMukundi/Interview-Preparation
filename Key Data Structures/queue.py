@@ -1,4 +1,3 @@
-
 """
 An implementation of a Queue ADT using a Python list (adapter design pattern).
 """
