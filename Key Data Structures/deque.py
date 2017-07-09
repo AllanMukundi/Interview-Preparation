@@ -63,6 +63,7 @@ class Deque:
             raise Empty('The Deque is empty.')
         back = (self._front + self._size - 1) % len(self._data)
         value = self._data[back]
+        self._data[back] = None
         self._size -= 1
         if 0 < self._size < (len(self._data) // 4):
             self._resize(len(self._data) // 2)

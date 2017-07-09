@@ -30,7 +30,7 @@ class Stack:
         self._data.append(i)
 
     def pop(self):
-        """Removes and returns the element on the top of the Stack."""
+        """Removes and returns the element on top of the Stack."""
         try:
             return self._data.pop()
         except:
