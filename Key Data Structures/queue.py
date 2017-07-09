@@ -39,7 +39,7 @@ class Queue:
         self._size += 1
 
     def dequeue(self):
-        """Removes and returns the first element in the queue."""
+        """Removes and returns the first element in the Queue."""
         if self.is_empty():
             raise Empty('The Queue is empty.')
         value = self._data[self._front]

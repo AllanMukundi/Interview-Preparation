@@ -5,19 +5,19 @@ An implementation of a Stack ADT using a Singly Linked List.
 class Empty(Exception):
     """
     Error for attempting to access an
-    element from an empty structure.
+    item from an empty structure.
     """
     pass
 
 
 class LinkedStack:
-    """Singly Linked List implementation."""
+    """Singly Linked List Stack implementation."""
 
     class _Node:
         """A lightweight, nonpublic class used as a Linked List node."""
         __slots__ = '_item', '_next'    # streamline memory usage
 
-        def __init__(self, item, next):
+        def __init__(self, item, next=None):
             self._item = item
             self._next = next
 
