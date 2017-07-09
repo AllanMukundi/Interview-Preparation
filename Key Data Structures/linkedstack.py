@@ -14,7 +14,7 @@ class LinkedStack:
     """Singly Linked List Stack implementation."""
 
     class _Node:
-        """A lightweight, nonpublic class used as a Linked List node."""
+        """A lightweight, non-public class used as a Linked List node."""
         __slots__ = '_item', '_next'    # streamline memory usage
 
         def __init__(self, item, next=None):

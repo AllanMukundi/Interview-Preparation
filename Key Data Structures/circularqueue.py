@@ -1,5 +1,5 @@
 """
-An implementation of a Queue ADT using a Singly Linked List.
+An implementation of a Queue ADT using a Circularly Linked List.
 """ 
 
 class Empty(Exception):
@@ -10,8 +10,8 @@ class Empty(Exception):
     pass
 
 
-class LinkedQueue:
-    """Singly Linked List Queue implementation."""
+class CircularQueue:
+    """Circularly Linked List Queue implementation."""
 
     class _Node:
         """A lightweight, non-public class used as a Linked List node."""
@@ -23,7 +23,6 @@ class LinkedQueue:
 
     def __init__(self):
         """Initializes an empty Queue."""
-        self._head = None
         self._tail = None
         self._size = 0
 
@@ -39,32 +38,42 @@ class LinkedQueue:
         """Adds item i to the end of the Queue."""
         new_node = self._Node(i)
         if self.is_empty():
-            self._head = new_node
+            new_node._next = new_node
         else:
+            new_node._next = self._tail._next
             self._tail._next = new_node
         self._tail = new_node
         self._size += 1
 
     def dequeue(self):
-        """Removes and returns the first item in the Queue."""
+        "Removes and returns the first item in the Queue."""
         if self.is_empty():
             raise Empty('The Queue is empty.')
-        value = self._head._item
-        self._head = self._head._next
-        if self.is_empty():
+        head = self._tail._next
+        if self._size == 1:
             self._tail = None
+        else:
+            self._tail._next = head._next
         self._size -= 1
-        return value
+        return head._item
 
     def front(self):
         """Returns the item at the front of the Queue but does not remove it."""
         if self.is_empty():
             raise Empty('The Queue is empty.')
-        return self._head._item
+        head = self._tail._next
+        return head._item
+
+
+    def rotate(self):
+        """Rotates the front item to the back of the Queue."""
+        if self._size > 0:
+            self._tail = self._tail._next
+
 
 # Unit Tests:
 if __name__ == '__main__':
-    q = LinkedQueue()
+    q = CircularQueue()
     assert(len(q) == 0)
     assert(q.is_empty() == True)
     q.enqueue('test')
