@@ -1,7 +1,8 @@
 from doublylinkedbase import _DoublyLinkedBase
 
 """
-An implementation of a Deque ADT using a Doubly Linked List."""
+An implementation of a Deque ADT using a Doubly Linked List.
+"""
 
 class Empty(Exception):
     """
