@@ -113,3 +113,56 @@ class PositionalList(_DoublyLinkedBase):
         original._item = i
         return value
 
+
+def insertion_sort(plist):
+    """Sorts a PositionalList of comparable elements in icreasing order."""
+    if len(plist) > 1:
+        marker = plist.first()
+        while (marker != plist.last()):
+            pivot = plist.after(marker)
+            value = pivot.item()
+            if (value > marker.item()):
+                marker = pivot
+            else:
+                walk = marker
+                while (walk != plist.first()) and (plist.before(walk).item() > value):
+                    walk = plist.before(walk)
+                plist.delete(pivot)
+                plist.add_before(walk, value)
+
+
+# Unit Tests:
+if __name__ == '__main__':
+    l = PositionalList()
+    assert(l.is_empty() == True)
+    l.add_first(3)
+    assert(len(l) == 1)
+    assert(l.first().item() == 3)
+    assert(l.after(l.first()) == None)
+    assert(l.before(l.first()) == None)
+    l.add_last(5)
+    l.add_last('test')
+    assert(len(l) == 3)
+    test_last = l.last()
+    assert(test_last.item() == 'test')
+    assert(l.before(test_last).item() == 5)
+    assert(l.after(test_last) == None)
+    l.replace(test_last, 10)
+    assert(test_last.item() == 10)
+    assert(l.delete(test_last) == 10)
+    assert(len(l) == 2)
+    assert(test_last._node._item == None)
+    l.add_before(l.last(), 999)
+    assert(l.after(l.first()).item() == 999)
+    l._insert_between(8, l.after(l.first())._node, l.last()._node)
+    assert(len(l) == 4)
+    assert(l.before(l.last()).item() == 8)
+    l.add_after(l.last(), 'test')
+    assert(l.last().item() == 'test')
+    l.delete(l.last())
+    l.delete(l.last())
+    l.delete(l.last())
+    l.delete(l.last())
+    l.delete(l.last())
+    assert(l.is_empty() == True)
+

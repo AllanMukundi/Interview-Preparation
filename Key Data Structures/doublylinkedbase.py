@@ -32,6 +32,8 @@ class _DoublyLinkedBase:
 
     def _insert_between(self, i, prev_node, next_node):
         """Inserts item i between two nodes and returns its new node."""
+        if (prev_node._next is not next_node) or (prev_node is not next_node._prev):
+            raise ValueError('Nodes are not adjacent.')
         new_node = self._Node(i, prev_node, next_node)
         prev_node._next = new_node
         next_node._prev = new_node
