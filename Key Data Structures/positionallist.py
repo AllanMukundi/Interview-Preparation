@@ -115,7 +115,7 @@ class PositionalList(_DoublyLinkedBase):
 
 
 def insertion_sort(plist):
-    """Sorts a PositionalList of comparable elements in icreasing order."""
+    """Sorts a PositionalList of comparable elements in increasing order."""
     if len(plist) > 1:
         marker = plist.first()
         while (marker != plist.last()):
@@ -129,6 +129,20 @@ def insertion_sort(plist):
                     walk = plist.before(walk)
                 plist.delete(pivot)
                 plist.add_before(walk, value)
+
+
+def insertion_sort_v2(plist):    # I find this method to be more intuitive
+    """Sorts a PositionalList of comparable elements in increasing order."""
+    if len(plist) > 1:
+        mark = plist.after(plist.first())
+        while mark != plist.after(plist.last()):
+            val = mark.item()
+            walk = mark
+            while walk != plist.first() and plist.before(walk).item() > val:
+                plist.replace(walk, plist.before(walk).item())
+                walk = plist.before(walk)
+            plist.replace(walk, val)
+            mark = plist.after(mark)
 
 
 # Unit Tests:
