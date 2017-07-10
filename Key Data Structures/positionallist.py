@@ -20,11 +20,11 @@ class PositionalList(_DoublyLinkedBase):
             return self._node._item
 
         def __eq__(self, other):
-            """Returns 'True' if other is a Position representing the same location."""
+            """Returns 'True' if other is a Position representing the same location and 'False' otherwise.."""
             return (type(other) is type(self)) and (self._node is other._node)
 
         def __ne__(self, other):
-            """Returns 'True' if other does not represent the same location."""
+            """Returns 'True' if other does not represent the same location and 'False' otherwise."""
             return not(self == other)
 
     # Utility Methods:
