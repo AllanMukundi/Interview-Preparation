@@ -59,6 +59,10 @@ class Tree:
         for p in self.positions():
             yield p.item()
 
+    def positions(self):
+        """Generates an iteration of the tree's positions."""
+        return self.preorder()
+
     def preorder(self):
         """Generates a pre-order iteration of the Positions in the Tree."""
         if not self.is_empty():
@@ -146,4 +150,8 @@ class BinaryTree(Tree):
         if self.right(p) is not None:
             for other in self._inorder(self.right(p)):
                 yield other
+
+    def positions(self):
+        """Generates an iteration of the tree's Positions."""
+        return self.inorder()
 

@@ -198,11 +198,6 @@ class LinkedBinaryTree(BinaryTree):
             p = self.root()
         return self._calc_height(p)
 
-    def positions(self):
-        """Generates an iteration of the tree's positions."""
-        return self.preorder()
-
-    
        
 # Unit Tests:
 if __name__ == '__main__':
