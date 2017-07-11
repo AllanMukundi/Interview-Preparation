@@ -1,11 +1,11 @@
 from linkedqueue import LinkedQueue
 
 """
-An implementation of a tree abstract base classes for various applications.
+An implementation of a Tree abstract base classes for various applications.
 """
 
 class Tree:
-    """An abstract base class describing a tree."""
+    """An abstract base class describing a Tree."""
 
     class Position:
         """An abstraction representing an item's location."""
@@ -23,7 +23,7 @@ class Tree:
             return not (self == other)
 
     def root(self):
-        """Returns a Position representing the tree's root (or None if the tree is empty)."""
+        """Returns a Position representing the Tree's root (or None if the Tree is empty)."""
         raise NotImplementedError('Subclass must implement this.')
 
     def parent(self, p):
@@ -60,7 +60,7 @@ class Tree:
             yield p.item()
 
     def positions(self):
-        """Generates an iteration of the tree's positions."""
+        """Generates an iteration of the Tree's positions."""
         return self.preorder()
 
     def preorder(self):
@@ -102,7 +102,7 @@ class Tree:
 
 
 class BinaryTree(Tree):
-    """An abstract base class describing a binary tree."""
+    """An abstract base class describing a Binary Tree."""
 
     def left(self, p):
         """
@@ -136,7 +136,7 @@ class BinaryTree(Tree):
             yield self.right(p)
 
     def inorder(self):
-        """Generates an in-order iteration of the Positions in Tree."""
+        """Generates an in-order iteration of the Positions in a Tree."""
         if not self.is_empty():
             for p in self._inorder(self.root()):
                 yield p
@@ -152,6 +152,6 @@ class BinaryTree(Tree):
                 yield other
 
     def positions(self):
-        """Generates an iteration of the tree's Positions."""
+        """Generates an iteration of the Tree's Positions."""
         return self.inorder()
 
