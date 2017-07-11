@@ -198,7 +198,39 @@ class LinkedBinaryTree(BinaryTree):
             p = self.root()
         return self._calc_height(p)
 
+    def positions(self):
+        """Generates an iteration of the tree's positions."""
+        return self.preorder()
+
+    
        
 # Unit Tests:
 if __name__ == '__main__':
-    print('No tests yet.')
+    tree = LinkedBinaryTree()
+    ltree = LinkedBinaryTree()
+    rtree = LinkedBinaryTree()
+    tree._add_root(3)
+    ltree._add_root(14)
+    ltree._add_left(ltree.root(), -7)
+    ltree._add_right(ltree.root(), 10)
+    rtree._add_root(100)
+    rtree._add_left(rtree.root(), 15)
+    rtree._add_right(rtree.root(), -14)
+    tree._attach(tree.root(), ltree, rtree)
+    assert(tree.is_empty() == False)
+    assert(tree.height() == 2)
+    assert(len(tree) == 7)
+    assert(tree.num_children(tree.root()) == 2)
+    leaf = tree.left(tree.left(tree.root()))
+    assert(tree.is_leaf(leaf) == True)
+    assert(tree.is_root(leaf) == False)
+    assert(tree.depth(leaf) == 2)
+    assert(tree.sibling(leaf).item() == 10)
+    assert(tree.num_children(leaf) == 0)
+    assert(tree.parent(leaf).item() == 14)
+    assert(tree._replace(tree.root(), -3) == 3)
+    assert(tree.root().item() == -3)
+    tree._add_left(leaf, 5)
+    assert(tree._delete(leaf) == -7)
+    assert(tree.left(tree.left(tree.root())).item() == 5)
+

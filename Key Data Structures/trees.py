@@ -1,3 +1,5 @@
+from linkedqueue import LinkedQueue
+
 """
 An implementation of a tree abstract base classes for various applications.
 """
@@ -52,6 +54,48 @@ class Tree:
         """Returns 'True' if the Tree is empty and 'False' otherwise."""
         return (len(self) == 0)
 
+    def __iter__(self):
+        """Generates an iteration of the Tree's items."""
+        for p in self.positions():
+            yield p.item()
+
+    def preorder(self):
+        """Generates a pre-order iteration of the Positions in the Tree."""
+        if not self.is_empty():
+            for p in self._preorder(self.root()):
+                yield p
+
+    def _preorder(self, p):
+        """Generates a pre-order iteration of the Positions in the subtree rooted at p."""
+        yield p
+        for child in self.children(p):
+            for other in self._preorder(child):
+                yield other
+
+    def postorder(self):
+        """Generates a post-order iteration of the Positions in the Tree."""
+        if not self.is_empty():
+            for p in self._postorder(self.root()):
+                yield p
+
+    def _postorder(self, p):
+        """Generates a post-order iteration of the Positions in the subtree rooted at p."""
+        for child in self.children(p):
+            for other in self._postorder(child):
+                yield other
+        yield p
+
+    def breadth_first(self):
+        """Generates a breadth-first iteration of the Positions in the Tree."""
+        if not self.is_empty():
+            q = LinkedQueue()
+            q.enqueue(self.root())
+            while not q.is_empty():
+                p = q.dequeue()
+                yield p
+                for child in self.children(p):
+                    q.enqueue(child)
+
 
 class BinaryTree(Tree):
     """An abstract base class describing a binary tree."""
@@ -86,4 +130,20 @@ class BinaryTree(Tree):
             yield self.left(p)
         if self.right(p) is not None:
             yield self.right(p)
+
+    def inorder(self):
+        """Generates an in-order iteration of the Positions in Tree."""
+        if not self.is_empty():
+            for p in self._inorder(self.root()):
+                yield p
+
+    def _inorder(self, p):
+        """Generates an in-order iteration of the Positions in the subtree rooted at p."""
+        if self.left(p) is not None:
+            for other in self._inorder(self.left(p)):
+                yield other
+        yield p
+        if self.right(p) is not None:
+            for other in self._inorder(self.right(p)):
+                yield other
 
