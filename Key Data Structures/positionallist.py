@@ -21,7 +21,7 @@ class PositionalList(_DoublyLinkedBase):
 
         def __eq__(self, other):
             """Returns 'True' if other is a Position representing the same location and 'False' otherwise.."""
-            return (type(other) is type(self)) and (self._node is other._node)
+            return (type(self) is type(other)) and (self._node is other._node)
 
         def __ne__(self, other):
             """Returns 'True' if other does not represent the same location and 'False' otherwise."""
@@ -30,7 +30,7 @@ class PositionalList(_DoublyLinkedBase):
     # Utility Methods:
 
     def _validate(self, p):
-        """Returns position p's node."""
+        """Returns Position p's node."""
         if not isinstance(p, self.Position):
             raise TypeError('p is not a Position.')
         if p._container is not self:

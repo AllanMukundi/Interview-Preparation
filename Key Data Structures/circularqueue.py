@@ -18,6 +18,7 @@ class CircularQueue:
         __slots__ = '_item', '_next'    # streamline memory usage
 
         def __init__(self, item, next=None):
+            """Initializes a Node."""
             self._item = item
             self._next = next
 
