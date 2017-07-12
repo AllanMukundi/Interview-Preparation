@@ -15,6 +15,7 @@ class PriorityQueueBase:
             self._value = v
 
         def pair(self):
+            """Returns the key-value pair (k, v) belonging to an Item."""
             return (self._key, self._value)
 
         def __lt__(self, other):
