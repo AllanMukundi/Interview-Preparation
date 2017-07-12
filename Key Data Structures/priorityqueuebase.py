@@ -14,6 +14,9 @@ class PriorityQueueBase:
             self._key = k
             self._value = v
 
+        def pair(self):
+            return (self._key, self._value)
+
         def __lt__(self, other):
             """
             Returns 'True' if the first Item's key (self)
