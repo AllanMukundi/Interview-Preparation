@@ -30,3 +30,4 @@ class MapBase(MutableMapping):
             is less than other's and 'False' otherwise.
             """
             return (self._key < other._key)
+

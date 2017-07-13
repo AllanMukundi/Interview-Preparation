@@ -1,6 +1,8 @@
 from mapbase import MapBase
 
-"""An implementation of a Map using an unsorted list."""
+"""
+An implementation of a Map using an unsorted list.
+"""
 
 class UnsortedTableMap(MapBase):
     """Map implementation using an unsorted list."""

@@ -2,7 +2,7 @@ from random import randrange
 from mapbase import MapBase
 
 """
-An implementation of an abstract base class for a Map using a Hash Table..
+An implementation of an abstract base class for a Map using a Hash Table.
 """
 
 class HashMapBase(MapBase):
@@ -16,9 +16,9 @@ class HashMapBase(MapBase):
         self._scale = randrange(1, p)
         self._shift = randrange(0, p)
 
-    def _hash_function(self, i):
-        """Returns a hash value for the immutable value i."""
-        return (hash(i)*self._scale + self._shift) % self._prime % len(self._table)
+    def _hash_function(self, k):
+        """Returns a hash value for the immutable value k."""
+        return (hash(k) * self._scale + self._shift) % self._prime % len(self._table)
 
     def __len__(self):
         """Returns the number of items in the Hash Table."""
@@ -46,8 +46,10 @@ class HashMapBase(MapBase):
         self._n -= 1
 
     def _resize(self, num):
+       """Resizes the table to use a new list of size num."""
        old = list(self.items())
        self._table = [None] * num
        self._n = 0    # to be computed during insertions
        for (k, v) in old:
            self[k] = v
+
