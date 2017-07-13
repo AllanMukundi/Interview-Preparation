@@ -80,7 +80,6 @@ if __name__ == '__main__':
     assert(m['barnes'] == 'test')
     m['barnes'] = 'foo'
     assert(m['barnes'] == 'foo')
-    del m['barnes']
     assert(len(m) == 2)
     del m['allan']
     assert(m['ereneo'] == 7)

@@ -94,6 +94,8 @@ class LinkedBinaryTree(BinaryTree):
             count += 1
         return count
 
+    # Mutators:
+
     def _add_root(self, i):
         """Places item i at the root of an empty Tree and returns its Position."""
         if self._root is not None:

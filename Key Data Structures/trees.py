@@ -52,7 +52,7 @@ class Tree:
 
     def is_empty(self):
         """Returns 'True' if the Tree is empty and 'False' otherwise."""
-        return (len(self) == 0)
+        return (self._size == 0)
 
     def __iter__(self):
         """Generates an iteration of the Tree's items."""
