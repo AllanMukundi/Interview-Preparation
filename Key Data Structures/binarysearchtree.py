@@ -122,6 +122,16 @@ class BinarySearchTree:
         self._size -= 1
         node._parent = node
 
+    # ----------AVL Tree----------
+
+    def _rebalance_add(self, node):
+        pass
+
+    def _rebalance_del(self, node):
+        pass
+
+    # ----------------------------
+
     # Accessors:
 
     def __len__(self):
@@ -173,6 +183,7 @@ class BinarySearchTree:
                 yield start
                 for child in self.children(start):
                     q.enqueue(child)
+                print('------------------')
     
     def preorder(self):
         """generates a pre-order iteration of the nodes in the tree."""
@@ -209,7 +220,7 @@ class BinarySearchTree:
             else:
                 parent._right = leaf
         self._size += 1
-        # self._rebalance_add(leaf)
+        self._rebalance_add(leaf)
 
     def delete(self, i):
         """Removes the Node with item i from the Tree."""
@@ -222,11 +233,10 @@ class BinarySearchTree:
                     curnode = replacement
                 parent = curnode._parent
                 self._delete(curnode)
-                # self._rebalance_delete(parent)
+                self._rebalance_del(parent)
                 return
             else:
                 raise ValueError('No node with the specified item exists.')
-            # self._rebalance_access(curnode)
         raise ValueError('No node with the specified item exists.')
 
 
@@ -252,5 +262,4 @@ if __name__ == '__main__':
     assert(bst.root()._item == 15)
     bst.delete(15)
     assert(bst.is_empty() == True)
-
 
