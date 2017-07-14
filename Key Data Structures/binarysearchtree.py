@@ -183,7 +183,6 @@ class BinarySearchTree:
                 yield start
                 for child in self.children(start):
                     q.enqueue(child)
-                print('------------------')
     
     def preorder(self):
         """generates a pre-order iteration of the nodes in the tree."""

@@ -65,39 +65,46 @@ class AVLTree(BinarySearchTree):
             return node
 
     def _compute_height(self, node):
+        """Recomputes the height of the given node."""
         node._height = 1 + max(node.left_height(), node.right_height())
 
     def _isbalanced(self, node):
+        """Returns 'True' if the subtree rooted at node is balanced and 'False' otherwise."""
         return abs(node.left_height() - node.right_height()) <= 1
 
     def _tall_child(self, node, left=False):
+        """Returns node's tallest child with the parameter 'left' being the tiebreaker."""
         if (node.left_height() + (1 if left else 0) > node.right_height()):
             return node._left
         else:
             return node._right
 
     def _tall_grandchild(self, node):
-        child = self._tall_child(node)
+        """Retrieves node's tallest grandchild."""
+        child = self._tall_child(node)    # node Y
         side = (child == node._left)
-        return self._tall_child(child, side)
+        return self._tall_child(child, side)    # node X
 
     def _rebalance(self, node):
+        """Rebalances the AVL Tree."""
         while node is not None:
             old = node._height
             if not self._isbalanced(node):
                 node = self._restructure(self._tall_grandchild(node))
+                self._compute_height(node._left)
                 self._compute_height(node._right)
             self._compute_height(node)
             if (node._height == old):
-                node = None
+                node = None    # no need to keep rebalancing
             else:
                 node = node._parent
 
-
     def _rebalance_add(self, node):
+        """Rebalances the Tree upon adding a new node."""
         self._rebalance(node)
 
     def _rebalance_del(self, node):
+        """Rebalances the Tree upon deleting a node."""
         self._rebalance(node)
 
 
