@@ -66,3 +66,4 @@ if __name__ == '__main__':
     assert(d.delete_last() == 5)
     assert(d.delete_last() == 3)
     assert(d.is_empty() == True)
+
