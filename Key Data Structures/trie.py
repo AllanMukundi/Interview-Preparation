@@ -31,14 +31,12 @@ class Trie:
         """Adds a word to the Trie."""
         cur_node = self._root
         finished = True
-
         for i in range(len(word)):
             if word[i] in cur_node._children:
                 cur_node = cur_node._children[word[i]]
             else:
                 finished = False
                 break
-
         if not finished:    # create a new node for every letter
             while i < len(word):
                 cur_node.add(word[i])
@@ -53,7 +51,6 @@ class Trie:
             raise ValueError('word must be a string.')
         if (word == ''):
             return False
-
         cur_node = self._root
         exists = True
         for letter in word:
@@ -62,11 +59,9 @@ class Trie:
             else:
                 exists = False
                 break
-
         if exists:
             if (cur_node._data == None):
                 exists = False
-
         return exists
 
     def prefix_words(self, prefix):
