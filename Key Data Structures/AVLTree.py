@@ -107,6 +107,18 @@ class AVLTree(BinarySearchTree):
         """Rebalances the Tree upon deleting a node."""
         self._rebalance(node)
 
+    def path_sum(self, root, sum):
+        """
+        Returns 'True' if there is a path down from the root to a node
+        which equals the given sum and 'False' otherwise.
+        """
+        if not root:
+            return False
+        if root._item == sum:
+            return True
+        sum -= root._item
+        return self.path_sum(root._left, sum) or self.path_sum(root._right, sum)
+
 
 # Unit Tests:
 if __name__ == '__main__':
@@ -120,7 +132,6 @@ if __name__ == '__main__':
     avl.add(10)
     assert(len(avl) == 6)
     assert(avl.first()._item == 1)
-    assert(avl.last()._item == 19)
     avl.add(0)
     avl.add(15)
     assert(avl.depth(avl.last()) == 2)

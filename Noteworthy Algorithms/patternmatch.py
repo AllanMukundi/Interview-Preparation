@@ -22,14 +22,14 @@ def find_boyer_moore(word, pattern):
     Returns the lowest index of word in which the specified
     pattern begins (or -1 if no such pattern exists).
     """
-    word_len, pattern_len = len(word), len(pattern)
-    if (pattern_len == 0):
+    w_len, p_len = len(word), len(pattern)
+    if (p_len == 0):
         return 0
     last = {}
-    for x in range(pattern_len):
-        last[pattern[x]] = x
-    i = j = pattern_len - 1
-    while (i < word_len):
+    for n in range(p_len):
+        last[pattern[n]] = n
+    i = j = p_len - 1
+    while (i < w_len):
         if (word[i] == pattern[j]):
             if (j == 0):
                 return i
@@ -38,10 +38,9 @@ def find_boyer_moore(word, pattern):
                 j -= 1
         else:
             k = last.get(word[i], -1)
-            i += pattern_len - min(j, k+1)
-            j = pattern_len - 1
+            i += p_len - min(k+1, j)
+            j = p_len - 1
     return -1
-
 
 # Unit Tests:
 if __name__ == '__main__':
@@ -53,7 +52,7 @@ if __name__ == '__main__':
     assert(find_brute('t', 't') == 0)
     assert(find_brute('daniel', '') == 0)
     assert(find_brute('', 'testing') == -1)
-    assert(find_brute('', '',) == 0)
+    assert(find_brute('', '') == 0)
     assert(find_boyer_moore('this is my string', '') == 0)
     assert(find_boyer_moore('test', 'test') == 0)
     assert(find_boyer_moore('waterloo', 'loo') == 5)

@@ -15,13 +15,9 @@ class Trie:
             self._data = data
             self._children = {}
 
-        def add(self, letter, word=None):
-            """Adds a letter or a node to the Trie."""
-            if not isinstance(letter, type(self)):
-                self._children[letter] = Trie._Node(letter, word)
-            else:
-                node = letter
-                self.children[node._letter] = node
+        def add(self, letter):
+            """Adds a letter to the Trie."""
+            self._children[letter] = Trie._Node(letter)
 
     def __init__(self):
         """Initializes the Trie."""
@@ -42,7 +38,6 @@ class Trie:
                 cur_node.add(word[i])
                 cur_node = cur_node._children[word[i]]
                 i += 1
-
         cur_node._data = word    # stores the completed word in the node
 
     def has_word(self, word):

@@ -70,7 +70,6 @@ def topological_sort(graph):
             incount[opposite] -= 1
             if (incount[opposite] == 0):
                 ready.append(opposite)
-    return [x.element() for x in topo]
     return topo 
 
 def djikstra(graph, start):

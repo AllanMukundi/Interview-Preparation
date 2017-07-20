@@ -123,12 +123,15 @@ class Graph:
             self._outgoing[key].pop(v, None)
         self._outgoing.pop(v, None)
         self._incoming.pop(v, None)
+        return v
 
     def del_edge(self, u, v):
         """Removes Edge (u, v) from the Graph (also removes (v, u) if undirected)."""
+        edge = self._outgoing[u][v]
         self._outgoing[u].pop(v, None)
         self._incoming[v].pop(u, None)
         if not self.is_directed():
             self._outgoing[v].pop(u, None)
             self._incoming[u].pop(v, None)
+        return edge
 

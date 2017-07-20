@@ -100,7 +100,7 @@ class HeapPriorityQueue(PriorityQueueBase):
         if self.is_empty():
             raise Empty('The Priority Queue is empty.')
         item = self._data[0]
-        return (item._key, item._value)
+        return item.pair()
 
     def remove_min(self):
         """Removes and returns the key-value pair (k, v) with the minimum key."""
@@ -109,7 +109,7 @@ class HeapPriorityQueue(PriorityQueueBase):
         self._swap(0, len(self._data) - 1)
         item = self._data.pop()
         self._downheap(0)
-        return (item._key, item._value)
+        return item.pair()
 
     def update(self, item, key, value):
         """Updates the key and value for the specified Item."""
