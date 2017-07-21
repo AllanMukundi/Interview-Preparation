@@ -6,7 +6,20 @@ that returns the node at the beginning of the loop.
 """
 
 def is_loop(llist):
-    pass
+    slow = fast = llist._head
+    while(slow._next and fast._next._next):
+        slow = slow._next
+        fast = fast._next._next
+        if (fast == slow):
+            break
+    slow = llist._head
+    while(slow._next and fast._next):
+        slow = slow._next
+        fast = fast._next
+        if (fast == slow):
+            return fast
+    return None
+        
 
 # Unit Tests:
 if __name__ == '__main__':
@@ -18,4 +31,5 @@ if __name__ == '__main__':
     llist.add(11)
     llist.add(0)
     llist._tail._next = repeat
-    print(llist)
+    print(is_loop(llist).item())
+

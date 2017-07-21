@@ -30,5 +30,31 @@ class Stack:
         raise IndexError('Cannot check the top of an empty Stack.')
 
 
-def sort_stack(stack):
-    pass
+def stack_sort(stack):
+    temp_stack = Stack()
+    while(not stack.is_empty()):
+        temp = stack.pop()
+        while(not temp_stack.is_empty() and temp < temp_stack.top()):
+            stack.push(temp_stack.pop())
+        temp_stack.push(temp)
+    while(not temp_stack.is_empty()):
+        stack.push(temp_stack.pop())
+
+
+# Output Test:
+if __name__ == '__main__':
+    s = Stack()
+    s.push(8)
+    s.push(0)
+    s.push(-4)
+    s.push(11)
+    s.push(19)
+    s.push(21)
+    s.push(3)
+    s.push(14)
+    s.push(1)
+    s.push(14)
+    print(s._data)
+    stack_sort(s)
+    print(s._data)
+
