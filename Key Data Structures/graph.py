@@ -130,8 +130,5 @@ class Graph:
         edge = self._outgoing[u][v]
         self._outgoing[u].pop(v, None)
         self._incoming[v].pop(u, None)
-        if not self.is_directed():
-            self._outgoing[v].pop(u, None)
-            self._incoming[u].pop(v, None)
         return edge
 
