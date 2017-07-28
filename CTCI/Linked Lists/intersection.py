@@ -13,7 +13,10 @@ def intersect(llist1, llist2):
     curnode_1 = longer._head
     curnode_2 = shorter._head
 
-    while (len(longer) > len(shorter)):
+    len_longer = len(longer)
+    len_shorter = len(shorter)
+
+    for i in range(len_longer - len_shorter): 
         curnode_1 = curnode_1._next
 
     while(curnode_1 and curnode_2):
@@ -22,4 +25,5 @@ def intersect(llist1, llist2):
         else:
             curnode_1 = curnode_1._next
             curnode_2 = curnode_2._next
+    return False
 

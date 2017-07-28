@@ -81,7 +81,7 @@ class Graph:
 
     def get_edge(self, u, v):
         """Returns the Edge from u to v, or None if not adjacent."""
-        return self._outgoing[u].get(v)
+        return self._outgoing[u].get(v, None)
 
     def degree(self, v, outgoing=True):
         """
@@ -117,9 +117,9 @@ class Graph:
 
     def del_vertex(self, v):
         """Removes Vertex v from the Graph."""
-        for key in list(self._outgoing[v].keys()):
+        for key in self._outgoing.keys():
             self._incoming[key].pop(v, None)
-        for key in list(self._incoming[v].keys()):
+        for key in self._incoming.keys():
             self._outgoing[key].pop(v, None)
         self._outgoing.pop(v, None)
         self._incoming.pop(v, None)
