@@ -9,28 +9,19 @@ be a tree such that the heights of the left and right subtrees
 never differ by more than one.
 """
 
-def children(node):
-    if node._left:
-        yield node._left
-    if node._right:
-        yield node._right
-
-def is_leaf(node):
-    return not (node._left or node._right)
-
-def height(node):
-    if node is None or is_leaf(node):
+def _balanced(node):
+    if node is None:
         return 0
-    else:
-        return 1 + max(height(child) for child in children(node))
+    left = _balanced(node._left)
+    right = _balanced(node._right)
+    if (left == -1) or (right == -1) or abs(left - right) > 1:
+        return -1
+    return 1 + max(left, right)
 
 def is_balanced(root):
     if root is None:
         return True
-    elif abs(height(root._left) - height(root._right)) > 1:
-        return False
-    return is_balanced(root._left) and is_balanced(root._right)
-
+    return (_balanced(root) != -1)
 
 # Unit Tests:
 if __name__ == '__main__':
