@@ -26,18 +26,15 @@ class Trie:
     def add(self, word):
         """Adds a word to the Trie."""
         cur_node = self._root
-        finished = True
         for i in range(len(word)):
             if word[i] in cur_node._children:
                 cur_node = cur_node._children[word[i]]
             else:
-                finished = False
                 break
-        if not finished:    # create a new node for every letter
-            while i < len(word):
-                cur_node.add(word[i])
-                cur_node = cur_node._children[word[i]]
-                i += 1
+        while i < len(word): # create a new node for every letter
+            cur_node.add(word[i])
+            cur_node = cur_node._children[word[i]]
+            i += 1
         cur_node._data = word    # stores the completed word in the node
 
     def has_word(self, word):
@@ -47,17 +44,12 @@ class Trie:
         if (word == ''):
             return False
         cur_node = self._root
-        exists = True
         for letter in word:
             if letter in cur_node._children:
                 cur_node = cur_node._children[letter]
             else:
-                exists = False
-                break
-        if exists:
-            if (cur_node._data == None):
-                exists = False
-        return exists
+                return False
+        return cur_node._data == word
 
     def prefix_words(self, prefix):
         """Returns a list of all the words in the Trie that start with prefix."""
@@ -70,11 +62,11 @@ class Trie:
                 cur_node = cur_node._children[letter]
             else:
                 return words
-        queue = [cur_node]
-        while queue:
-            cur_node = queue.pop()
+        stack = [cur_node]
+        while stack:
+            cur_node = stack.pop()
             if cur_node._data != None:
                 words.append(cur_node._data)
-            queue += [node for letter, node in cur_node._children.items()] 
+            stack += [child for child in cur_node._children.values()]
         return words
 

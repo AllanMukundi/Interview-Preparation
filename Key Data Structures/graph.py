@@ -96,9 +96,8 @@ class Graph:
         Returns all outgoing Edges incident to Vertex v.
         If the Graph is directed, optional parameter is used to request incoming Edges.
         """
-        adj = self._outgoing if outgoing else self._incoming
-        for edge in adj[v].values():
-            yield edge
+        adj = self._outgoing[v] if outgoing else self._incoming[v]
+        return adj.values()
 
     def add_vertex(self, x=None):
         """Inserts and returns a new Vertex with element x."""
@@ -128,7 +127,7 @@ class Graph:
     def del_edge(self, u, v):
         """Removes Edge (u, v) from the Graph (also removes (v, u) if undirected)."""
         edge = self._outgoing[u][v]
-        self._outgoing[u].pop(v, None)
-        self._incoming[v].pop(u, None)
+        self._outgoing[u][v] = None
+        self._incoming[v][u] = None
         return edge
 

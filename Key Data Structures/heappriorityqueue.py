@@ -17,8 +17,7 @@ class HeapPriorityQueue(PriorityQueueBase):
 
     class _Item(PriorityQueueBase._Item):
         """A lightweight, non-public composite used to store Priority Queue items."""
-
-        __slots__ = '_index'    # streamline memory usage
+        __slots__ = '_index'    # streamline memory usage 
 
         def __init__(self, k, v, index):
             """Initializes an Item."""
