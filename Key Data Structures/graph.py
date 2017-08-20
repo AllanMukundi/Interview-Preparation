@@ -52,16 +52,20 @@ class Graph:
         self._outgoing = {}
         self._incoming = {} if directed else self._outgoing
 
+    def __len__(self):
+        """Returns the number of Vertices in the Graph."""
+        return len(self._outgoing)
+
+    def is_empty(self):
+        """Returns 'True' if the Graph is empty and 'False' otherwise."""
+        return len(self) == 0
+
     def is_directed(self):
         """
         Returns 'True' if the Graph was initialized as 
         a directed Graph and 'False' otherwise.
         """
         return self._incoming is not self._outgoing
-
-    def vertex_count(self):
-        """Returns the number of Vertices in the Graph."""
-        return len(self._outgoing)
 
     def vertices(self):
         """Returns an iteration of all of the Vertices in the Graph."""
@@ -116,10 +120,9 @@ class Graph:
 
     def del_vertex(self, v):
         """Removes Vertex v from the Graph."""
-        for key in self._outgoing.keys():
-            self._incoming[key].pop(v, None)
-        for key in self._incoming.keys():
-            self._outgoing[key].pop(v, None)
+        for u in self.vertices():
+            self._outgoing[u].pop(v, None)
+            self._incoming[u].pop(v, None)
         self._outgoing.pop(v, None)
         self._incoming.pop(v, None)
         return v
@@ -127,7 +130,7 @@ class Graph:
     def del_edge(self, u, v):
         """Removes Edge (u, v) from the Graph (also removes (v, u) if undirected)."""
         edge = self._outgoing[u][v]
-        self._outgoing[u][v] = None
-        self._incoming[v][u] = None
+        self._outgoing[u].pop(v, None)
+        self._incoming[v].pop(u, None)
         return edge
 
