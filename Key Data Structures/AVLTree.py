@@ -9,7 +9,7 @@ class AVLTree(BinarySearchTree):
 
     class _Node(BinarySearchTree._Node):
         """A lightweight, non-public class used for storing a node."""
-        __slots__ = '_height',    # streamline memory usage
+        __slots__ = '_height'    # streamline memory usage
 
         def __init__(self, item, parent=None, left=None, right=None):
             """Initializes a Node."""
@@ -106,18 +106,6 @@ class AVLTree(BinarySearchTree):
     def _rebalance_del(self, node):
         """Rebalances the Tree upon deleting a node."""
         self._rebalance(node)
-
-    def path_sum(self, root, sum):
-        """
-        Returns 'True' if there is a path down from the root to a node
-        which equals the given sum and 'False' otherwise.
-        """
-        if not root:
-            return False
-        if root._item == sum:
-            return True
-        sum -= root._item
-        return self.path_sum(root._left, sum) or self.path_sum(root._right, sum)
 
 
 # Unit Tests:
