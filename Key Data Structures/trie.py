@@ -25,17 +25,17 @@ class Trie:
 
     def add(self, word):
         """Adds a word to the Trie."""
-        cur_node = self._root
+        curnode = self._root
         for i in range(len(word)):
-            if word[i] in cur_node._children:
-                cur_node = cur_node._children[word[i]]
+            if word[i] in curnode._children:
+                curnode = curnode._children[word[i]]
             else:
                 break
         while i < len(word): # create a new node for every letter
-            cur_node.add(word[i])
-            cur_node = cur_node._children[word[i]]
+            curnode.add(word[i])
+            curnode = curnode._children[word[i]]
             i += 1
-        cur_node._data = word    # stores the completed word in the node
+        curnode._data = word    # stores the completed word in the node
 
     def has_word(self, word):
         """Returns 'True' if the Trie contains the specified word and 'False' otherwise."""
@@ -43,30 +43,30 @@ class Trie:
             raise ValueError('word must be a string.')
         if (word == ''):
             return False
-        cur_node = self._root
+        curnode = self._root
         for letter in word:
-            if letter in cur_node._children:
-                cur_node = cur_node._children[letter]
+            if letter in curnode._children:
+                curnode = curnode._children[letter]
             else:
                 return False
-        return cur_node._data == word
+        return curnode._data == word
 
     def prefix_words(self, prefix):
         """Returns a list of all the words in the Trie that start with prefix."""
         if not isinstance(prefix, str):
             raise ValueError('prefix must be a string.')
         words = []
-        cur_node = self._root
+        curnode = self._root
         for letter in prefix:
-            if letter in cur_node._children:
-                cur_node = cur_node._children[letter]
+            if letter in curnode._children:
+                curnode = curnode._children[letter]
             else:
                 return words
-        stack = [cur_node]
+        stack = [curnode]
         while stack:
-            cur_node = stack.pop()
-            if cur_node._data != None:
-                words.append(cur_node._data)
-            stack += [child for child in cur_node._children.values()]
+            curnode = stack.pop()
+            if curnode._data != None:
+                words.append(curnode._data)
+            stack += [child for child in curnode._children.values()]
         return words
 

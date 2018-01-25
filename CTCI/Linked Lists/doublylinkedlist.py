@@ -33,15 +33,15 @@ class LinkedList:
         return items
 
     def add(self, item):
-        newnode = self._Node(item)
+        new_node = self._Node(item)
         if len(self) == 0:
-            self._head = newnode
+            self._head = new_node
         else:
-            self._tail._next = newnode
-            newnode._prev = self._tail
-        self._tail = newnode
+            self._tail._next = new_node
+            new_node._prev = self._tail
+        self._tail = new_node
         self._size += 1
-        return newnode
+        return new_node
 
     def delete(self, item):
         prevnode = None
